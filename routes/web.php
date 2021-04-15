@@ -25,6 +25,22 @@ Auth::routes();
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
+	Route::group(['prefix' => '/brand'], function () {
+		Route::get('/list', 'App\Http\Controllers\BrandsController@index')->name('brands');
+		Route::post('/', 'App\Http\Controllers\BrandsController@create')->name('new_brand');
+		Route::get('/{id}', 'App\Http\Controllers\BrandsController@materialsList')->name('brand_details');
+		Route::put('/{id}', 'App\Http\Controllers\BrandsController@edite');
+		Route::delete('/{id}', 'App\Http\Controllers\BrandsController@delete')->name('brand_delete');
+
+	});
+	Route::group(['prefix' => '/materials'], function () {
+		Route::post('/', 'App\Http\Controllers\MaterialsController@create')->name('new_material');
+		Route::get('/{id}', 'App\Http\Controllers\BrandsController@materialsList')->name('brand_details');
+		Route::put('/{id}', 'App\Http\Controllers\BrandsController@edite');
+		Route::delete('/{id}', 'App\Http\Controllers\MaterialsController@delete')->name('material_delete');
+
+	});
+	
 	Route::get('table-list', function () {
 		return view('pages.table_list');
 	})->name('table');
