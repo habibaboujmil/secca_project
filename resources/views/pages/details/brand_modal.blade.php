@@ -19,15 +19,15 @@
                 <input type="text" name="brand_name" class="form-control">
             </div>
             <!-- logo de la marque  -->
-            <div class="input-group-prepend">
+            <!-- <div class="input-group-prepend">
                 <span class="input-group-text" id="brand_logo">logo de la marque</span>
-            </div>
-            <div class="input-group mb-3">
+            </div> -->
+            <!-- <div class="input-group mb-3"> -->
                 <!-- <div class=""> -->
-                    <input type="file" class="form-control" name="brand_logo" id="marque_logo">
+                    <!-- <input type="file" class="form-control" name="brand_logo" id="marque_logo"> -->
                     <!-- <label class="custom-file-label" for="marque_logo">Choisir une image</label>
                 </div> -->
-            </div>
+            <!-- </div> -->
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>

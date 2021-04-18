@@ -35,6 +35,7 @@ Route::group(['middleware' => 'auth'], function () {
 	});
 	Route::group(['prefix' => '/materials'], function () {
 		Route::post('/', 'App\Http\Controllers\MaterialsController@create')->name('new_material');
+		Route::post('/upload', 'App\Http\Controllers\MaterialsController@addMaterialsWithExcel')->name('upload_material');
 		Route::get('/{id}', 'App\Http\Controllers\BrandsController@materialsList')->name('brand_details');
 		Route::put('/{id}', 'App\Http\Controllers\BrandsController@edite');
 		Route::delete('/{id}', 'App\Http\Controllers\MaterialsController@delete')->name('material_delete');

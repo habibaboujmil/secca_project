@@ -18878,3 +18878,32 @@ Copyright (c) 2015 Daniel Eden
 .action{
   display: flex;
 }
+.pagination{
+  justify-content: center;
+}
+
+.page-item.active .page-link {
+  background-color: #1075bb;
+}
+.page-link {
+  color: #1075bb;
+}
+td{
+  font-size: 12px;
+}
+.custom-file {
+    border: solid 1px #e9ecef;
+    border-radius: 7px;
+}
+.custom-file *:hover{
+  cursor: pointer;
+}
+
+.card-icon{
+  text-transform: uppercase;
+  font-size: 40px;
+  font-weight: 600;
+}
+.card-title{
+  padding:15px
+}

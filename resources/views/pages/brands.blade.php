@@ -8,17 +8,22 @@
             <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Ajouter</button>
         </div>
       <div class="row">
-        @foreach($brands as $brand)
+        @foreach($brands as $index => $brand)
+            @php
+            if(($index) %4 == 0 ) {$card_color = 'card-header-warning';}
+            elseif(($index) %4 == 1 ) {$card_color = 'card-header-success';}
+            elseif(($index) %4 == 2 ) {$card_color = 'card-header-danger';}
+            else {$card_color = 'card-header-primary';}
+            @endphp
+           
         <div class="col-lg-3 col-md-6 col-sm-6">
             <a href={{route('brand_details', ['id'=>$brand->id])}}>
                 <div class="card card-stats">
-                    <div class="card-header card-header-warning card-header-icon">
-                        <div class="card-icon">
-                        <img class="card-img" sizes="60*60" src="{{Storage::url($brand->logo)}}"></img>
+                    <div class="card-header {{$card_color}} card-header-icon">
+                        <div class="card-icon">{{$brand->name[0]}}{{$brand->name[1]}}
                         </div>
-                        <h3 class="card-title">{{$brand->name}}
-                        </h3>
                     </div>
+                    <h3 class="card-title">{{$brand->name}}</h3>
                     <div class="card-footer">
                         <div class="stats">
                             <i class="material-icons">local_offer</i>

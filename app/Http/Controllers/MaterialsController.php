@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Material;
 use Illuminate\Support\Facades\Storage;
+use App\Imports\MaterialImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MaterialsController extends Controller
 {
@@ -25,6 +27,20 @@ class MaterialsController extends Controller
         $material = Material::find($id);
         Storage::disk('public')->delete('brand'.$material->img);
         $brand->delete();
+        return back();
+    }
+
+     /**
+    * @return \Illuminate\Support\Collection
+    */
+    public function addMaterialsWithExcel(Request $request) 
+    {
+        // dd(request()->file('file'));
+        $brand_id =$request->input('brand_id');
+        $MaterialImport =new MaterialImport();
+        $MaterialImport->brand_id = $brand_id ;
+        Excel::import($MaterialImport,request()->file('file'));
+             
         return back();
     }
 }

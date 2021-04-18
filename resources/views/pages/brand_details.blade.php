@@ -1,10 +1,12 @@
 @extends('layouts.app', ['activePage' => 'brands', 'titlePage' => __('  ')])
 @section('content')
 @include('pages.details.material_modal')
+@include('pages.details.importExcelModal')
 <div class="content">
   <div class="container-fluid">
     <div>
       <button style="margin-left:17px"class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Ajouter</button>
+      <button style="margin-left:17px"class="btn btn-primary" data-toggle="modal" data-target="#ImportExcel">Importer par Excel</button>
     </div>  
     <div class="row">
       <div class="col-md-12">
@@ -47,8 +49,12 @@
             </div>
           </div>
         </div>
+        <div class="pagination">
+          {{ $brand->materials->links() }}
+        </div>
       </div>
     </div>
   </div>
 </div>
+
 @endsection

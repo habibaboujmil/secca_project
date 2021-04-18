@@ -15,7 +15,7 @@ class CreateMaterialsTable extends Migration
     {
         Schema::create('materials', function (Blueprint $table) {
             $table->id();
-            $table->string('reference')->unique();
+            $table->string('reference')->nullable();;
             $table->string('designation')->nullable();
             $table->string('img')->nullable();
             $table->integer('quantity')->nullable();
