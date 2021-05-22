@@ -12,7 +12,7 @@ class BrandsController extends Controller
     public function index()
     {
         $brands = Brand::withCount('materials')->get();
-        return view('pages.brands',compact('brands'));
+        return view('pages.brands.brands',compact('brands'));
     }
     public function create(Request $request)
     {
@@ -28,15 +28,25 @@ class BrandsController extends Controller
     public function materialsList($id)
     {
         $brand = Brand::find($id);
-        $brand->materials = Material::where('brand_id',$brand->id)->orderBy('id','desc')->paginate(25);
+        $brand->materials = Material::where('brand_id',$brand->id)->orderBy('id','desc')->paginate(40);
         // return response()->json($brand);
-        return view('pages.brand_details',compact('brand'));
+        return view('pages.brands.brand_details',compact('brand'));
     }
     public function delete($id)
     {
         $brand = Brand::find($id);
-        Storage::disk('public')->delete('brand'.$brand->logo);
+        if (!empty($brand->logo)) {
+            Storage::disk('public')->delete('brand'.$brand->logo);
+        }
         $brand->delete();
+        return back();
+    }
+
+    public function edite(Request $request, $id)
+    {
+        $brand = Brand::find($id);
+        $brand->name = $request->input('brand_name');
+        $brand->save();
         return back();
     }
 

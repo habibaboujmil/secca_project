@@ -1,7 +1,8 @@
 @extends('layouts.app', ['activePage' => 'brands', 'titlePage' => __('  ')])
 @section('content')
-@include('pages.details.material_modal')
-@include('pages.details.importExcelModal')
+@include('pages.brands.details.material_modal')
+@include('pages.brands.details.importExcelModal')
+@include('pages.brands.details.delete_modal')
 <div class="content">
   <div class="container-fluid">
     <div>
@@ -35,12 +36,12 @@
                     <td>{{$item->quantity}}</td>
                     <td>{{$item->note}}</td>
                     <td class="action">
-                      <i class="material-icons edit">edit</i>
-                      <form action="{{route('material_delete', ['id'=>$item->id])}}" method="post">
-                          <input class="material-icons delete" type="submit" value="delete_forever" />
-                          @method('delete')
-                          @csrf
-                      </form>
+                      <i onclick="showDetails(this)" class="material-icons edit" data-toggle="modal" data-target="#editeMaterial" 
+                          data-id="{{$item->id}}" data-reference="{{$item->reference}}"
+                          data-designation="{{$item->designation}}" data-quantity="{{$item->quantity}}"
+                          data-note="{{$item->note}}">edit</i>
+                      <i onclick="deleteItem(this,'/materials/')" class="material-icons delete" data-toggle="modal" data-target="#deleteModal" 
+                      data-id="{{$item->id}}" data-item="{{$item->reference}}">delete_forever</i>
                     </td>
                   </tr>
                   @endforeach
@@ -56,5 +57,19 @@
     </div>
   </div>
 </div>
+<script>
+  function showDetails(element) {
+    var id = element.getAttribute("data-id");
+    var reference = element.getAttribute("data-reference");
+    var designation = element.getAttribute("data-designation");
+    var quantity = element.getAttribute("data-quantity");
+    var note = element.getAttribute("data-note");
+    document.getElementById("reference").value = reference;
+    document.getElementById("designation").value = designation;
+    document.getElementById("quantity").value = quantity;
+    document.getElementById("note").value = note;
+    document.getElementById("material_form").action = window.location.origin+'/materials/'+id;
+  }
 
+</script>
 @endsection

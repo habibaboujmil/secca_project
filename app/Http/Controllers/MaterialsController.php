@@ -22,11 +22,24 @@ class MaterialsController extends Controller
         $material->save();
         return back();
     }
+    public function edite(Request $request,$id){
+
+        $material = Material::find($id);
+        $material->reference = $request->input('reference');
+        $material->designation = $request->input('designation');
+        $material->quantity = $request->input('quantity');
+        $material->note = $request->input('note');
+        // $material->img = $request->input('img');
+        // $material->brand_id = $request->input('brand_id');
+        $material->save();
+        return back();
+    }
+
     public function delete($id)
     {
         $material = Material::find($id);
-        Storage::disk('public')->delete('brand'.$material->img);
-        $brand->delete();
+        // Storage::disk('public')->delete('brand'.$material->img);
+        $material->delete();
         return back();
     }
 

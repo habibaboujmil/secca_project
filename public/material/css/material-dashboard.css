@@ -22,11 +22,22 @@
   border: none;
   padding-top: 3px;
 }
+.edit:hover, .delete:hover{
+  cursor: pointer;
+}
 .delete{
   font-size:18px;
   color:red;
   background-color: white;
   border: none;
+  padding-top:3px;
+}
+.delete-modal-icon{
+  font-size: 60px;
+  padding: 30px;
+  color:red;
+  background-color: white;
+  border: none
 }
 .card {
   font-size: .875rem;
@@ -18906,4 +18917,7 @@ td{
 }
 .card-title{
   padding:15px
+}
+.margin-top-40{
+  margin-top:40px !important;
 }

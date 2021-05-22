@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 Auth::routes();
@@ -29,15 +29,15 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/list', 'App\Http\Controllers\BrandsController@index')->name('brands');
 		Route::post('/', 'App\Http\Controllers\BrandsController@create')->name('new_brand');
 		Route::get('/{id}', 'App\Http\Controllers\BrandsController@materialsList')->name('brand_details');
-		Route::put('/{id}', 'App\Http\Controllers\BrandsController@edite');
+		Route::post('/{id}', 'App\Http\Controllers\BrandsController@edite');
 		Route::delete('/{id}', 'App\Http\Controllers\BrandsController@delete')->name('brand_delete');
 
 	});
 	Route::group(['prefix' => '/materials'], function () {
 		Route::post('/', 'App\Http\Controllers\MaterialsController@create')->name('new_material');
+		Route::post('/{id}', 'App\Http\Controllers\MaterialsController@edite');
 		Route::post('/upload', 'App\Http\Controllers\MaterialsController@addMaterialsWithExcel')->name('upload_material');
 		Route::get('/{id}', 'App\Http\Controllers\BrandsController@materialsList')->name('brand_details');
-		Route::put('/{id}', 'App\Http\Controllers\BrandsController@edite');
 		Route::delete('/{id}', 'App\Http\Controllers\MaterialsController@delete')->name('material_delete');
 
 	});
@@ -72,7 +72,12 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
-	Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
+	Route::resource('user', 'App\Http\Controllers\UserController', ['names' => [
+		'create' => 'user.store'
+	]], ['except' => ['show','update']]);
+	// Route::get('user', 'App\Http\Controllers\UserController@index')->name('usersListe');
+	Route::post('user/{id}', 'App\Http\Controllers\UserController@update');
+	
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);

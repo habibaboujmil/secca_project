@@ -29,15 +29,15 @@
             <p>Liste des affaires</p>
         </a>
       </li>
-      <li class="nav-item{{ $activePage == 'profile' ? ' active' : '' }}">
+      <!-- <li class="nav-item{{ $activePage == 'profile' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('profile.edit') }}">
           <i class="material-icons">people_alt</i>
           <span class="sidebar-normal">{{ __('User profile') }} </span>
         </a>
-      </li>
+      </li> -->
       <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('user.index') }}">
-          <i class="material-icons">library_books</i>
+          <i class="material-icons">people_alt</i>
           <span class="sidebar-normal"> Gestion des utilisateurs </span>
         </a>
       </li>

@@ -732,3 +732,9 @@ function debounce(func, wait, immediate) {
     if (immediate && !timeout) func.apply(context, args);
   };
 };
+function deleteItem(element,action) {
+  var brandID = element.getAttribute("data-id");
+  var item = element.getAttribute("data-item");
+    document.getElementById("item").innerHTML = item;
+    document.getElementById("delete").action = window.location.origin+action+brandID;
+}
