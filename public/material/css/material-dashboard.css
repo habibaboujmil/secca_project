@@ -18921,3 +18921,17 @@ td{
 .margin-top-40{
   margin-top:40px !important;
 }
+
+.header-table{
+  display: flex;
+  align-items: baseline
+}
+.header-table i{
+  padding:15px;
+  float:right;
+  position: relative;
+  top: 5px;
+}
+.header-table i:hover{
+  cursor: pointer;
+}

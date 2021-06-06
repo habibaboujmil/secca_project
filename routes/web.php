@@ -35,11 +35,21 @@ Route::group(['middleware' => 'auth'], function () {
 	});
 	Route::group(['prefix' => '/materials'], function () {
 		Route::post('/', 'App\Http\Controllers\MaterialsController@create')->name('new_material');
-		Route::post('/{id}', 'App\Http\Controllers\MaterialsController@edite');
 		Route::post('/upload', 'App\Http\Controllers\MaterialsController@addMaterialsWithExcel')->name('upload_material');
+		Route::post('/{id}', 'App\Http\Controllers\MaterialsController@edite');
 		Route::get('/{id}', 'App\Http\Controllers\BrandsController@materialsList')->name('brand_details');
 		Route::delete('/{id}', 'App\Http\Controllers\MaterialsController@delete')->name('material_delete');
 
+	});
+
+	Route::group(['prefix' => '/affairs'], function () {
+		Route::get('/', 'App\Http\Controllers\AffairsController@index')->name('affairList');
+		Route::post('/', 'App\Http\Controllers\AffairsController@createViaExcel')->name('createViaExcel');
+		Route::get('/details-{id}', 'App\Http\Controllers\AffairsController@details')->name('affair_details');
+		Route::delete('/{id}', 'App\Http\Controllers\AffairsController@delete')->name('delete_affair');
+		Route::get('/create', function () {
+			return view('pages.affairs.create');
+		})->name('create_affairs');
 	});
 	
 	Route::get('table-list', function () {

@@ -16,6 +16,7 @@ class MaterialsController extends Controller
         $material->reference = $request->input('reference');
         $material->designation = $request->input('designation');
         $material->quantity = $request->input('quantity');
+        $material->unit_price = $request->input('unit_price');
         $material->note = $request->input('note');
         $material->img = $request->input('img');
         $material->brand_id = $request->input('brand_id');
@@ -29,6 +30,7 @@ class MaterialsController extends Controller
         $material->designation = $request->input('designation');
         $material->quantity = $request->input('quantity');
         $material->note = $request->input('note');
+        $material->unit_price = $request->input('unit_price');
         // $material->img = $request->input('img');
         // $material->brand_id = $request->input('brand_id');
         $material->save();

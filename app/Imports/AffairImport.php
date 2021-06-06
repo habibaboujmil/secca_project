@@ -3,10 +3,10 @@
 namespace App\Imports;
 
 use Maatwebsite\Excel\Concerns\ToModel;
-use App\Models\Material;
+use App\Models\AffairEquipment;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class MaterialImport implements ToModel, WithHeadingRow
+class AffairImport implements ToModel, WithHeadingRow
 {
     
     /**
@@ -19,12 +19,12 @@ class MaterialImport implements ToModel, WithHeadingRow
         if (isset($row['prix'])) {
             $price = $row['prix'];
         }else  $price = 0 ;
-        return new Material([
+        return new AffairEquipment([
             'reference'     => $row['reference'],
             'designation'    => $row['designation'], 
             'quantity' => $row['quantite'],
             'unit_price' => $price,
-            'brand_id'=> $this->brand_id,
+            'affair_id'=> $this->affair_id,
         ]);
     }
 }

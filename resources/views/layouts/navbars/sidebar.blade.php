@@ -23,8 +23,8 @@
             <p>Liste des matériels</p>
         </a>
       </li>
-      <li class="nav-item{{ $activePage == 'table' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('table') }}">
+      <li class="nav-item{{ $activePage == 'affairList' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('affairList') }}">
           <i class="material-icons">content_paste</i>
             <p>Liste des affaires</p>
         </a>

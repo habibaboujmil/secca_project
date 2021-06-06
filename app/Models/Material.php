@@ -4,9 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Affair;
+
 
 class Material extends Model
 {
     protected $fillable =['reference','designation','quantity','brand_id'];
     use HasFactory;
+
+    public function Affairs()
+    {
+        return $this->belongsToMany(Affair::class, 'affair_material','material_id','affair_id')->withTimestamps();
+    }
 }

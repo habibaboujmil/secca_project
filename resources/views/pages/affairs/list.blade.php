@@ -1,48 +1,37 @@
-@extends('layouts.app', ['activePage' => 'brands', 'titlePage' => __('  ')])
+@extends('layouts.app', ['activePage' => 'affairList', 'titlePage' => __('  ')])
+@include('pages.affairs.details.delete_modal')
 @section('content')
-@include('pages.brands.details.material_modal')
-@include('pages.brands.details.importExcelModal')
-@include('pages.brands.details.delete_modal')
 <div class="content">
   <div class="container-fluid">
     <div>
-      <button style="margin-left:17px"class="btn btn-primary" data-toggle="modal" data-target="#editeMaterial">Ajouter</button>
-      <button style="margin-left:17px"class="btn btn-primary" data-toggle="modal" data-target="#ImportExcel">Importer par Excel</button>
+      <a  href="{{route('create_affairs')}}" style="margin-left:17px"class="btn btn-primary">Ajouter</a>
     </div>  
     <div class="row">
       <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-primary">
-            <h4 class="card-title ">Marque: {{$brand->name}}</h4>
-            <p class="card-category"> Liste des matériaux</p>
+            <h4 class="card-title ">Liste des affaires</h4>
           </div>
           <div class="card-body">
             <div class="table-responsive">
               <table class="table">
                 <thead class=" text-primary">
-                  <th>ID</th>
+                  <th>Num</th>
                   <th>Ref</th>
-                  <th>Désignation</th>
-                  <th>Quantitie</th>
-                  <th>Prix</th>
-                  <th> Remarque</th>
-                  <th> Action</th>
+                  <th>Remarque</th>
+                  <th>date de création</th>
+                  <th>Action</th>
                 </thead>
                 <tbody>
-                  @foreach($brand->materials as $index => $item)
+                  @foreach($affairs as $index => $item)
                   <tr>
-                    <td> {{$index+1}} </td>
+                    <td>{{$index+1}} </td>
                     <td>{{$item->reference}}</td>
-                    <td>{{$item->designation}}</td>
-                    <td>{{$item->quantity}}</td>
-                    <td>{{$item->unit_price}}</td>
-                    <td>{{$item->note}}</td>
+                    <td>{{$item->description}}</td>
+                    <td>{{$item->created_at}}</td>
                     <td class="action">
-                      <i onclick="showDetails(this)" class="material-icons edit" data-toggle="modal" data-target="#editeMaterial" 
-                          data-id="{{$item->id}}" data-reference="{{$item->reference}}" data-price="{{$item->unit_price}}"
-                          data-designation="{{$item->designation}}" data-quantity="{{$item->quantity}}"
-                          data-note="{{$item->note}}">edit</i>
-                      <i onclick="deleteItem(this,'/materials/')" class="material-icons delete" data-toggle="modal" data-target="#deleteModal" 
+                      <a href="{{route('affair_details',['id' => $item->id])}}" class="material-icons edit">content_paste</a>
+                      <i onclick="deleteItem(this,'/affairs/')" class="material-icons delete" data-toggle="modal" data-target="#deleteModal" 
                       data-id="{{$item->id}}" data-item="{{$item->reference}}">delete_forever</i>
                     </td>
                   </tr>
@@ -53,7 +42,7 @@
           </div>
         </div>
         <div class="pagination">
-          {{ $brand->materials->links() }}
+          {{ $affairs->links() }}
         </div>
       </div>
     </div>

@@ -1,19 +1,18 @@
-@extends('layouts.app', ['activePage' => 'brands', 'titlePage' => __('  ')])
+@extends('layouts.app', ['activePage' => 'affairList', 'titlePage' => __('  ')])
 @section('content')
-@include('pages.brands.details.material_modal')
-@include('pages.brands.details.importExcelModal')
-@include('pages.brands.details.delete_modal')
+@include('pages.affairs.details.material_modal')
+@include('pages.affairs.details.importExcelModal')
+@include('pages.affairs.details.delete_modal')
 <div class="content">
   <div class="container-fluid">
     <div>
       <button style="margin-left:17px"class="btn btn-primary" data-toggle="modal" data-target="#editeMaterial">Ajouter</button>
-      <button style="margin-left:17px"class="btn btn-primary" data-toggle="modal" data-target="#ImportExcel">Importer par Excel</button>
     </div>  
     <div class="row">
       <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-primary">
-            <h4 class="card-title ">Marque: {{$brand->name}}</h4>
+            <h4 class="card-title ">Référence: {{$affair->reference}}</h4>
             <p class="card-category"> Liste des matériaux</p>
           </div>
           <div class="card-body">
@@ -29,7 +28,7 @@
                   <th> Action</th>
                 </thead>
                 <tbody>
-                  @foreach($brand->materials as $index => $item)
+                  @foreach($affair->materials as $index => $item)
                   <tr>
                     <td> {{$index+1}} </td>
                     <td>{{$item->reference}}</td>
@@ -53,7 +52,7 @@
           </div>
         </div>
         <div class="pagination">
-          {{ $brand->materials->links() }}
+          {{ $affair->materials->links() }}
         </div>
       </div>
     </div>
