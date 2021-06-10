@@ -25,8 +25,8 @@ Auth::routes();
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
-	Route::group(['prefix' => '/brand'], function () {
-		Route::get('/list', 'App\Http\Controllers\BrandsController@index')->name('brands');
+	Route::group(['prefix' => '/brands'], function () {
+		Route::get('/', 'App\Http\Controllers\BrandsController@index')->name('brands');
 		Route::post('/', 'App\Http\Controllers\BrandsController@create')->name('new_brand');
 		Route::get('/{id}', 'App\Http\Controllers\BrandsController@materialsList')->name('brand_details');
 		Route::post('/{id}', 'App\Http\Controllers\BrandsController@edite');
@@ -45,11 +45,17 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::group(['prefix' => '/affairs'], function () {
 		Route::get('/', 'App\Http\Controllers\AffairsController@index')->name('affairList');
 		Route::post('/', 'App\Http\Controllers\AffairsController@createViaExcel')->name('createViaExcel');
-		Route::get('/details-{id}', 'App\Http\Controllers\AffairsController@details')->name('affair_details');
+		Route::get('/details/{id}', 'App\Http\Controllers\AffairsController@details')->name('affair_details');
 		Route::delete('/{id}', 'App\Http\Controllers\AffairsController@delete')->name('delete_affair');
 		Route::get('/create', function () {
 			return view('pages.affairs.create');
 		})->name('create_affairs');
+		Route::group(['prefix' => '/equipment'], function () {
+			Route::post('/', 'App\Http\Controllers\AffairsController@createEquipment')->name('create_equipment');
+			Route::post('/{id}', 'App\Http\Controllers\AffairsController@editeEquipment')->name('edite_equipment');
+			Route::delete('/{id}', 'App\Http\Controllers\AffairsController@deleteEquipment')->name('delete_equipment');
+
+		});
 	});
 	
 	Route::get('table-list', function () {

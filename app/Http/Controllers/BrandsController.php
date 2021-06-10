@@ -9,9 +9,14 @@ use App\Models\Material;
 
 class BrandsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $brands = Brand::withCount('materials')->get();
+        $search =$request->input('search');
+        $brands = Brand::withCount('materials')
+                    ->when(!empty($search),function ($q) use($search){
+                        $q->where('name','like', '%'.$search.'%');
+                    })
+                    ->get();
         return view('pages.brands.brands',compact('brands'));
     }
     public function create(Request $request)
@@ -25,11 +30,15 @@ class BrandsController extends Controller
         return back();
     }
 
-    public function materialsList($id)
+    public function materialsList(Request $request, $id)
     {
         $brand = Brand::find($id);
-        $brand->materials = Material::where('brand_id',$brand->id)->orderBy('id','desc')->paginate(40);
-        // return response()->json($brand);
+        $search =$request->input('search');
+        $brand->materials = Material::where('brand_id',$brand->id)
+                            ->when(!empty($search),function ($q) use($search){
+                                $q->where('reference', 'like', '%'.$search.'%');
+                            })->orderBy('id','desc')->paginate(40);
+                            // return response()->json($brand);
         return view('pages.brands.brand_details',compact('brand'));
     }
     public function delete($id)

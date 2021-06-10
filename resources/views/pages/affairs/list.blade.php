@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'affairList', 'titlePage' => __('  ')])
+@extends('layouts.app', ['activePage' => 'affairList', 'titlePage' => __('Affaires'), 'page'=>'affairs'])
 @include('pages.affairs.details.delete_modal')
 @section('content')
 <div class="content">

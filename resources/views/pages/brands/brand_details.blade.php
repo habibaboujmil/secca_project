@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'brands', 'titlePage' => __('  ')])
+@extends('layouts.app', ['activePage' => 'brands', 'titlePage' => __('Matériaux'), 'page'=>'materials'])
 @section('content')
 @include('pages.brands.details.material_modal')
 @include('pages.brands.details.importExcelModal')
@@ -14,7 +14,7 @@
         <div class="card">
           <div class="card-header card-header-primary">
             <h4 class="card-title ">Marque: {{$brand->name}}</h4>
-            <p class="card-category"> Liste des matériaux</p>
+            <p class="card-category"> Liste des matériaux: </p>
           </div>
           <div class="card-body">
             <div class="table-responsive">

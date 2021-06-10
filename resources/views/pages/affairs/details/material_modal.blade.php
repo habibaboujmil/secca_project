@@ -7,10 +7,10 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form id="material_form" action="{{ route('new_material') }}" enctype="multipart/form-data" method ="post">
+      <!-- <form id="material_form" action="{{ route('create_equipment') }}" enctype="multipart/form-data" method ="post"> -->
         <div class="modal-body">
             <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
-            <input name="brand_id" type="hidden" value="{{(isset($brand))?$brand->id : null}}"/>
+            <input name="affair_id" type="hidden" value="{{(isset($affair))?$affair->id : null}}"/>
             <!-- Référence -->
             <div class="input-group-prepend">
                 <span class="input-group-text">Référence</span>
@@ -59,9 +59,25 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-            <button type="submit" class="btn btn-primary">Enregistrer</button>
+            <button onclick="addEquipment()" type="button" class="btn btn-primary">Enregistrer</button>
         </div>
-      </form>
+      <!-- </form> -->
     </div>
   </div>
 </div>
+
+<script>
+function addEquipment(){
+    var array = [];
+    $("input[class=form-control]").each(function() {
+        array.push({
+            input: $(this).attr("name"),
+            value: $(this).val()
+        });
+    });
+    // then to get the JSON string
+    var jsonString = JSON.stringify(array);
+    console.log(jsonString);
+}
+
+</script>

@@ -13,16 +13,24 @@ use Maatwebsite\Excel\Facades\Excel;
 class AffairsController extends Controller
 {
     public function index(Request $request){
-        $affairs = Affair::orderBy('id','DESC')->paginate(15); 
+        $search =$request->input('search');
+        $affairs = Affair::when(!empty($search),function ($q) use($search){
+                        $q->where('reference', 'like', '%'.$search.'%');
+                    })-> orderBy('id','DESC')->paginate(30); 
         return view('pages.affairs.list', compact('affairs'));
     }
     
-    public function details($id)
+    public function details(Request $request,$id)
     {
-        $affair = Affair::with('materials')->find($id); 
-        $affair->materials = AffairEquipment::where('affair_id',$id)->orderBy('id','desc')->paginate(40);
+        $affair = Affair::find($id);
+        $search =$request->input('search'); 
+        $affair->materials = AffairEquipment::where('affair_id',$id)
+                            ->when(!empty($search),function ($q) use($search){
+                                $q->where('reference', 'like', '%'.$search.'%');
+                                // ->orWhere('description', 'like', '%'.$search.'%');
+                            })
+                            ->orderBy('id','desc')->paginate(40);
          return view('pages.affairs.details', compact('affair'));
-        // return response()->json($affair);
     }
 
     public function createViaExcel(Request $request){
@@ -40,6 +48,34 @@ class AffairsController extends Controller
     {
         $affair = Affair::find($id);
         $affair->delete();
+        return back();
+    }
+
+    public function createEquipment(Request $request){
+        $material = new AffairEquipment();
+        $material->reference = $request->input('reference');
+        $material->designation = $request->input('designation');
+        $material->quantity = $request->input('quantity');
+        $material->unit_price = $request->input('unit_price');
+        $material->note = $request->input('note');
+        $material->affair_id = $request->input('affair_id');
+        $material->save();
+        return back();
+    }
+
+    public function editeEquipment(Request $request, $id){
+        $material = AffairEquipment::find($id);
+        $material->reference = $request->input('reference');
+        $material->designation = $request->input('designation');
+        $material->quantity = $request->input('quantity');
+        $material->note = $request->input('note');
+        $material->unit_price = $request->input('unit_price');
+        $material->save();
+        return back();
+    }
+    public function deleteEquipment($id){
+        $material = AffairEquipment::find($id);
+        $material->delete();
         return back();
     }
 }

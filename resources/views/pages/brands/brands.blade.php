@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'brands', 'titlePage' => __('Marques')])
+@extends('layouts.app', ['activePage' => 'brands', 'titlePage' => __('Marques'), 'page'=>'brands'])
 
 @section('content')
 @include('pages.brands.details.brand_modal')
@@ -34,7 +34,7 @@
                     <div class=text-right> 
                         <i onclick="showDetails(this)" class="material-icons edit" data-toggle="modal" data-target="#exampleModalCenter" 
                             data-id="{{$brand->id}}" data-name="{{$brand->name}}">edit</i>
-                        <i onclick="deleteItem(this,'/brand/')" class="material-icons delete" data-toggle="modal" data-target="#deleteModal" 
+                        <i onclick="deleteItem(this,'/brands/')" class="material-icons delete" data-toggle="modal" data-target="#deleteModal" 
                         data-id="{{$brand->id}}" data-item="{{$brand->name}}">delete_forever</i>
                     </div>
                 </div>
@@ -50,7 +50,7 @@ function showDetails(element) {
   var brandID = element.getAttribute("data-id");
   var brandName = element.getAttribute("data-name");
     document.getElementById("brand_name").value = brandName;
-    document.getElementById("brand_form").action = window.location.origin+'/brand/'+brandID;
+    document.getElementById("brand_form").action = window.location.origin+'/brands/'+brandID;
 }
 
 </script>

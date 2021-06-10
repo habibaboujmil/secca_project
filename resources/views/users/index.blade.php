@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'user-management', 'titlePage' => __('  ')])
+@extends('layouts.app', ['activePage' => 'user-management', 'titlePage' => __('  '), 'page'=>'user'])
 @include('users.add_user')
 @include('pages.brands.details.delete_modal')
 @section('content')

@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'affairList', 'titlePage' => __('  ')])
+@extends('layouts.app', ['activePage' => 'affairList', 'titlePage' => __('  '),'page'=>'affairs/details'])
 @section('content')
 @include('pages.affairs.details.material_modal')
 @include('pages.affairs.details.importExcelModal')
@@ -41,7 +41,7 @@
                           data-id="{{$item->id}}" data-reference="{{$item->reference}}" data-price="{{$item->unit_price}}"
                           data-designation="{{$item->designation}}" data-quantity="{{$item->quantity}}"
                           data-note="{{$item->note}}">edit</i>
-                      <i onclick="deleteItem(this,'/materials/')" class="material-icons delete" data-toggle="modal" data-target="#deleteModal" 
+                      <i onclick="deleteItem(this,'/affairs/equipment/')" class="material-icons delete" data-toggle="modal" data-target="#deleteModal" 
                       data-id="{{$item->id}}" data-item="{{$item->reference}}">delete_forever</i>
                     </td>
                   </tr>
@@ -71,7 +71,7 @@
     document.getElementById("quantity").value = quantity;
     document.getElementById("unit_price").value = unit_price;
     document.getElementById("note").value = note;
-    document.getElementById("material_form").action = window.location.origin+'/materials/'+id;
+    document.getElementById("material_form").action = window.location.origin+'/affairs/equipment/'+id;
   }
 
 </script>

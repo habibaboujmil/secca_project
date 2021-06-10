@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'affairList', 'titlePage' => __('Création d\'une affaire')])
+@extends('layouts.app', ['activePage' => 'affairList', 'titlePage' => __('Création d\'une affaire'),'page'=>'create'])
 @include('pages.affairs.details.material_modal')
 @include('pages.affairs.details.importExcelModal')
 @section('content')
