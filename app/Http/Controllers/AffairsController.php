@@ -44,6 +44,27 @@ class AffairsController extends Controller
         Excel::import($MaterialImport,request()->file('file'));
         return back();
     }
+
+    public function createOneByOne(Request $request){
+        $affair = new Affair();
+        $affair->reference = $request->input('ref');
+        $affair->description = $request->input('description');
+        $affair->save();
+        $equipment_num = count($request->input('reference'));
+        $index = 0;
+        while ($index < $equipment_num ) {
+            $material = new AffairEquipment();
+            $material->reference = $request->input('reference')[$index];
+            $material->designation = $request->input('designation')[$index];
+            $material->quantity = $request->input('quantity')[$index];
+            $material->unit_price = $request->input('unit_price')[$index];
+            $material->note = $request->input('note')[$index];
+            $material->affair_id = $affair->id;
+            $material->save();
+            $index ++;
+        }
+        return back();
+    }
     public function delete($id)
     {
         $affair = Affair::find($id);

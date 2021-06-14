@@ -4,7 +4,7 @@
         <div class="modal-content">
             <form action="{{ route('createViaExcel') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <input type="hidden" name="ref"  id="ref" class="form-control" value="aff_{{ date('dmy_his') }}">
+                <input type="hidden" name="ref"  id="ref-affair" class="form-control" value="aff_{{ date('dmy_his') }}">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle">Ajout des matériaux par Excel </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">

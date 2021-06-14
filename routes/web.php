@@ -38,13 +38,15 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::post('/upload', 'App\Http\Controllers\MaterialsController@addMaterialsWithExcel')->name('upload_material');
 		Route::post('/{id}', 'App\Http\Controllers\MaterialsController@edite');
 		Route::get('/{id}', 'App\Http\Controllers\BrandsController@materialsList')->name('brand_details');
+		Route::get('/out-of-stock/{id}', 'App\Http\Controllers\MaterialsController@outOfStock')->name('outOfStock');
 		Route::delete('/{id}', 'App\Http\Controllers\MaterialsController@delete')->name('material_delete');
 
 	});
 
 	Route::group(['prefix' => '/affairs'], function () {
 		Route::get('/', 'App\Http\Controllers\AffairsController@index')->name('affairList');
-		Route::post('/', 'App\Http\Controllers\AffairsController@createViaExcel')->name('createViaExcel');
+		Route::post('/via-excel', 'App\Http\Controllers\AffairsController@createViaExcel')->name('createViaExcel');
+		Route::post('/one-by-one', 'App\Http\Controllers\AffairsController@createOneByOne')->name('createOneByOne');
 		Route::get('/details/{id}', 'App\Http\Controllers\AffairsController@details')->name('affair_details');
 		Route::delete('/{id}', 'App\Http\Controllers\AffairsController@delete')->name('delete_affair');
 		Route::get('/create', function () {
@@ -57,34 +59,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 		});
 	});
-	
-	Route::get('table-list', function () {
-		return view('pages.table_list');
-	})->name('table');
-
-	Route::get('typography', function () {
-		return view('pages.typography');
-	})->name('typography');
-
-	Route::get('icons', function () {
-		return view('pages.icons');
-	})->name('icons');
-
-	Route::get('map', function () {
-		return view('pages.map');
-	})->name('map');
-
-	Route::get('notifications', function () {
-		return view('pages.notifications');
-	})->name('notifications');
-
-	Route::get('rtl-support', function () {
-		return view('pages.language');
-	})->name('language');
-
-	Route::get('upgrade', function () {
-		return view('pages.upgrade');
-	})->name('upgrade');
 });
 
 Route::group(['middleware' => 'auth'], function () {

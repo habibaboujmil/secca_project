@@ -7,7 +7,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <!-- <form id="material_form" action="{{ route('create_equipment') }}" enctype="multipart/form-data" method ="post"> -->
+      <form id="equipment_form" action="{{ route('create_equipment') }}" enctype="multipart/form-data" method ="post">
         <div class="modal-body">
             <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
             <input name="affair_id" type="hidden" value="{{(isset($affair))?$affair->id : null}}"/>
@@ -49,37 +49,9 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-            <button onclick="addEquipment()" type="button" class="btn btn-primary" data-dismiss="modal">Enregistrer</button>
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
         </div>
-      <!-- </form> -->
+      </form>
     </div>
   </div>
 </div>
-
-<script>
-function addEquipment(){
-    var array = [];
-    var tr="<tr>";
-    $("input[class=form-control]").each(function() {
-        if ($(this).attr("name") == "reference") {
-          tr += '<td><input type="text" name="reference[]" id="reference" class="form-control" value="'+$(this).val()+'" required></td>'  
-        }
-        if ($(this).attr("name") == "designation") {
-          tr += '<td><input type="texterea" id="designation" name="designation[]" class="form-control" value="'+$(this).val()+'"></td>'  
-        }
-        if ($(this).attr("name") == "quantity") {
-          tr += '<td><input type="text" name="quantity[]" id="quantity" class="form-control" value="'+$(this).val()+'" required></td>'  
-        }
-        if ($(this).attr("name") == "unit_price") {
-          tr += '<td><input type="numeric" name="unit_price[]" id="unit_price" class="form-control" value="'+$(this).val()+'"></td>'  
-        }
-        if ($(this).attr("name") == "note") {
-          tr += '<td><input type="texterea" name="note[]" id="note" class="form-control" value="'+$(this).val()+'"></td>'  
-        }
-    });
-    tr += '<td class="action"><i onclick="delete_tr(this)" class="material-icons delete">delete_forever</i></td>';
-    tr +="</tr>";
-    $('#equipment-table').append(tr);
-}
-
-</script>

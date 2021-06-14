@@ -1,25 +1,20 @@
-@extends('layouts.app', ['activePage' => 'affairList', 'titlePage' => __('  '),'page'=>'affairs/details'])
+@extends('layouts.app', ['activePage' => 'brands', 'titlePage' => __('Matériaux'), 'page'=>'materials'])
 @section('content')
-@include('pages.affairs.details.equipment_modal')
-@include('pages.affairs.details.importExcelModal')
-@include('pages.affairs.details.delete_modal')
+@include('pages.brands.details.material_modal')
+@include('pages.brands.details.delete_modal')
 <div class="content">
-  <div class="container-fluid">
-    <div>
-      <button style="margin-left:17px"class="btn btn-primary" data-toggle="modal" data-target="#editeMaterial">Ajouter</button>
-    </div>  
+  <div class="container-fluid"> 
     <div class="row">
       <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-primary">
-            <h4 class="card-title ">Référence: {{$affair->reference}}</h4>
-            <p class="card-category"> Liste des matériaux</p>
+            <h4 class="card-title ">Marque: {{$brand->name}}</h4>
+            <p class="card-category"> Matériel en repture du stock: </p>
           </div>
           <div class="card-body">
             <div class="table-responsive">
               <table class="table">
                 <thead class=" text-primary">
-                  <th>ID</th>
                   <th>Ref</th>
                   <th>Désignation</th>
                   <th>Quantitie</th>
@@ -28,9 +23,7 @@
                   <th> Action</th>
                 </thead>
                 <tbody>
-                  @foreach($affair->materials as $index => $item)
                   <tr>
-                    <td> {{$index+1}} </td>
                     <td>{{$item->reference}}</td>
                     <td>{{$item->designation}}</td>
                     <td>{{$item->quantity}}</td>
@@ -41,24 +34,24 @@
                           data-id="{{$item->id}}" data-reference="{{$item->reference}}" data-price="{{$item->unit_price}}"
                           data-designation="{{$item->designation}}" data-quantity="{{$item->quantity}}"
                           data-note="{{$item->note}}">edit</i>
-                      <i onclick="deleteItem(this,'/affairs/equipment/')" class="material-icons delete" data-toggle="modal" data-target="#deleteModal" 
+                      <i onclick="deleteItem(this,'/materials/')" class="material-icons delete" data-toggle="modal" data-target="#deleteModal" 
                       data-id="{{$item->id}}" data-item="{{$item->reference}}">delete_forever</i>
                     </td>
                   </tr>
-                  @endforeach
                 </tbody>
               </table>
             </div>
           </div>
-        </div>
-        <div class="pagination">
-          {{ $affair->materials->links() }}
         </div>
       </div>
     </div>
   </div>
 </div>
 <script>
+  (function() {
+    var elem = document.getElementById("search");
+    elem.remove();
+  })();
   function showDetails(element) {
     var id = element.getAttribute("data-id");
     var reference = element.getAttribute("data-reference");
@@ -71,7 +64,7 @@
     document.getElementById("quantity").value = quantity;
     document.getElementById("unit_price").value = unit_price;
     document.getElementById("note").value = note;
-    document.getElementById("equipment_form").action = window.location.origin+'/affairs/equipment/'+id;
+    document.getElementById("material_form").action = window.location.origin+'/materials/'+id;
   }
 
 </script>

@@ -6,7 +6,7 @@
   <div class="container-fluid">  
     <div class="row">
       <div class="col-md-12">
-        <form>
+        <form action="{{ route('createOneByOne') }}" method ="post">
             <div class="card">
                 <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
                 <div class="card-body">
@@ -27,6 +27,20 @@
                     <i title="Ajouter un élément" class="material-icons" data-toggle="modal" data-target="#editeMaterial">add_circle_outline</i> 
                     <i title="Ajouter via Excel"class="material-icons" data-toggle="modal" data-target="#ImportExcel">post_add</i> 
                   </div>
+                  <div class="table-responsive">
+                    <table class="table" id="equipment-table">
+                      <thead class=" text-primary">
+                        <th>Ref</th>
+                        <th>Désignation</th>
+                        <th>Quantitie</th>
+                        <th>Prix</th>
+                        <th> Remarque</th>
+                        <th> Action</th>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary float-right">Enregistrer</button>
@@ -36,8 +50,12 @@
   </div>
 </div>
 <script>
-function addData() {
-
+(function() {
+  var elem = document.getElementById("search");
+  elem.remove();
+})();
+function delete_tr(tr) {
+  $(tr).parents('tr').remove();
 }
 </script>
 @endsection

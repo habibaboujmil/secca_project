@@ -66,6 +66,9 @@
     console.log(password);
     document.getElementById("user_form").action = window.location.origin+'/user/'+id;
   }
-
+  (function() {
+    var elem = document.getElementById("search");
+    elem.remove();
+  })();
 </script>
 @endsection

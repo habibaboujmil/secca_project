@@ -58,4 +58,10 @@ class MaterialsController extends Controller
              
         return back();
     }
+
+    public function outOfStock($id){
+        $item = Material::with('brand')->find($id);
+        $brand = $item->brand;
+        return view('pages.brands.outOfStock',compact('item','brand'));
+    }
 }
